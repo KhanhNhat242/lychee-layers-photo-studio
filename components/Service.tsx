@@ -280,9 +280,6 @@ const Service = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Header section */}
                     <div className="text-center max-w-2xl mx-auto space-y-3 mb-16 sm:mb-20">
-                        <div className="text-xs font-semibold tracking-widest uppercase text-[#C89D7C]">
-                            Chi phí minh bạch & Đặt lịch
-                        </div>
                         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#2E2728]">
                             Bảng giá & Đặt lịch
                         </h2>

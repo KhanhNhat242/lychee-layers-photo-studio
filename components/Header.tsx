@@ -11,9 +11,9 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: 'Trang chủ', href: '#hero' },
-  { label: 'Concept', href: '#concepts' },
-  { label: 'Bảng giá', href: '#pricing' },
-  { label: 'Thư viện', href: '#gallery' },
+  { label: 'Về chúng tôi', href: '#about-us' },
+  { label: 'Dịch vụ', href: '#service' },
+  { label: 'Collection', href: '#gallery' },
   { label: 'Liên hệ', href: '#contact' },
 ]
 
@@ -23,10 +23,26 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      const heroContent = document.getElementById('hero-content')
+      const headerElem = document.querySelector('header')
+      const headerHeight = headerElem ? headerElem.offsetHeight : 70
+
+      if (heroContent) {
+        const contentTop = heroContent.getBoundingClientRect().top
+        // Chuyển sang nền trắng khi cuộn xuống chạm đúng vị trí của đoạn text content ở HeroBanner
+        setIsScrolled(contentTop <= headerHeight)
+      } else {
+        setIsScrolled(window.scrollY > 30)
+      }
     }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
   }, [])
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -42,11 +58,10 @@ const Header = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[#FFFDF9]/90 backdrop-blur-md shadow-[0_4px_20px_rgba(200,157,124,0.08)] border-b border-[#EFE8DC]/80 py-3.5'
-          : 'bg-[#FFFDF9]/80 backdrop-blur-sm border-b border-[#EFE8DC]/60 py-4.5'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${isScrolled
+        ? 'bg-[#FFFDF9]/95 backdrop-blur-md shadow-[0_4px_20px_rgba(200,157,124,0.08)] py-3.5'
+        : 'bg-transparent shadow-none py-5 sm:py-6'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
@@ -55,7 +70,8 @@ const Header = () => {
             href="/"
             className="group flex items-center gap-2.5 transition-opacity hover:opacity-90"
           >
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-[#C89D7C]/40 relative flex-shrink-0">
+            <div className={`w-8 h-8 rounded-full overflow-hidden relative flex-shrink-0 transition-colors duration-300 ${isScrolled ? 'border border-[#C89D7C]/40' : 'border border-[#A65B64]/50 shadow-xs'
+              }`}>
               <Image
                 src="/images/logo-img.jpg"
                 alt="Lychee Layers Logo"
@@ -66,10 +82,14 @@ const Header = () => {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif text-xl sm:text-2xl font-normal tracking-wide text-[#2E2728]">
+              <span className={`font-serif text-xl sm:text-2xl tracking-wide transition-colors duration-300 ${isScrolled
+                ? 'text-[#2E2728] font-normal'
+                : 'text-[#1F1A1B] font-medium drop-shadow-[0_1px_8px_rgba(255,253,249,0.9)]'
+                }`}>
                 Lychee Layers
               </span>
-              <span className="text-[9px] tracking-[0.22em] uppercase text-[#C89D7C] -mt-1 font-medium">
+              <span className={`text-[9px] tracking-[0.22em] uppercase -mt-1 font-semibold transition-colors duration-300 ${isScrolled ? 'text-[#C89D7C]' : 'text-[#A65B64]'
+                }`}>
                 Artistic Studio
               </span>
             </div>
@@ -82,10 +102,14 @@ const Header = () => {
                 key={item.label}
                 href={item.href}
                 onClick={(e) => scrollToSection(e, item.href)}
-                className="text-sm font-normal text-[#2E2728]/80 hover:text-[#C89D7C] transition-colors duration-200 tracking-wide relative group py-1"
+                className={`text-sm tracking-wide relative group py-1 transition-all duration-300 ${isScrolled
+                  ? 'text-[#2E2728]/80 hover:text-[#C89D7C] font-normal'
+                  : 'text-[#1F1A1B] hover:text-[#A65B64] font-medium drop-shadow-[0_1px_8px_rgba(255,253,249,0.95)]'
+                  }`}
               >
                 {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#C89D7C] transition-all duration-300 group-hover:w-full rounded-full" />
+                <span className={`absolute bottom-0 left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full rounded-full ${isScrolled ? 'bg-[#C89D7C]' : 'bg-[#A65B64]'
+                  }`} />
               </a>
             ))}
           </nav>
@@ -95,7 +119,10 @@ const Header = () => {
             <a
               href="#booking"
               onClick={(e) => scrollToSection(e, '#booking')}
-              className="inline-flex items-center justify-center px-5 py-2 rounded-full text-xs sm:text-sm font-medium tracking-wide text-white bg-[#C89D7C] hover:bg-[#B88D6C] shadow-sm hover:shadow-[0_4px_14px_rgba(200,157,124,0.35)] transition-all duration-300 active:scale-95"
+              className={`inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 active:scale-95 ${isScrolled
+                ? 'text-white bg-[#C89D7C] hover:bg-[#B88D6C] shadow-sm hover:shadow-[0_4px_14px_rgba(200,157,124,0.35)]'
+                : 'text-white bg-[#A65B64] hover:bg-[#8C535A] shadow-[0_4px_16px_rgba(166,91,100,0.35)] hover:shadow-[0_6px_20px_rgba(166,91,100,0.45)]'
+                }`}
             >
               Đặt lịch ngay
             </a>
@@ -106,7 +133,10 @@ const Header = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="p-2 rounded-lg text-[#2E2728] hover:bg-[#F3EDE2] transition-colors focus:outline-none"
+              className={`p-2 rounded-lg transition-colors focus:outline-none ${isScrolled
+                ? 'text-[#2E2728] hover:bg-[#F3EDE2]'
+                : 'text-[#1F1A1B] hover:bg-white/40'
+                }`}
               aria-label="Toggle menu"
             >
               <svg
@@ -137,23 +167,26 @@ const Header = () => {
 
         {/* Mobile Dropdown Menu */}
         {isOpen && (
-          <div className="md:hidden pt-3 pb-4 border-t border-[#EFE8DC]/80 mt-3 animate-fadeIn">
+          <div className={`md:hidden pt-3 pb-4 mt-3 rounded-2xl transition-all duration-300 animate-fadeIn ${isScrolled
+            ? 'border-t border-[#EFE8DC]/80'
+            : 'bg-[#FFFDF9]/95 backdrop-blur-md border border-[#EFE8DC] shadow-lg px-4'
+            }`}>
             <div className="flex flex-col space-y-2.5">
               {navItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   onClick={(e) => scrollToSection(e, item.href)}
-                  className="px-3 py-2 text-sm text-[#2E2728] hover:bg-[#F3EDE2] rounded-lg transition-colors font-normal"
+                  className="px-3 py-2 text-sm text-[#2E2728] hover:bg-[#F3EDE2] rounded-lg transition-colors font-medium"
                 >
                   {item.label}
                 </a>
               ))}
-              <div className="pt-2 px-2">
+              <div className="pt-2 px-1">
                 <a
                   href="#booking"
                   onClick={(e) => scrollToSection(e, '#booking')}
-                  className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-medium text-white bg-[#C89D7C] hover:bg-[#B88D6C] transition-all text-center"
+                  className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-medium text-white bg-[#A65B64] hover:bg-[#8C535A] transition-all text-center shadow-sm"
                 >
                   Đặt lịch ngay
                 </a>
