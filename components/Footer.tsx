@@ -1,0 +1,158 @@
+'use client'
+
+import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import {
+  PhoneOutlined,
+  FacebookOutlined,
+  EnvironmentOutlined,
+  InstagramOutlined,
+  HeartFilled,
+} from '@ant-design/icons'
+
+const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  return (
+    <footer className="bg-[#FAF5EF] text-[#2E2728] pt-16 sm:pt-20 pb-10 border-t border-[#EFE8DC]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-[#EFE8DC]">
+          {/* Cột 1: Thương hiệu */}
+          <div className="md:col-span-5 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full overflow-hidden border border-[#C89D7C]/50 relative">
+                <Image
+                  src="/images/logo-img.jpg"
+                  alt="Lychee Layers Studio"
+                  fill
+                  sizes="40px"
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <span className="font-serif text-2xl font-normal tracking-wide text-[#2E2728] block">
+                  Lychee Layers
+                </span>
+                <span className="text-[10px] tracking-[0.25em] text-[#C89D7C] uppercase block font-medium">
+                  Artistic & Portrait Studio
+                </span>
+              </div>
+            </div>
+            <p className="text-sm text-[#2E2728]/75 leading-relaxed max-w-md font-light">
+              Nơi lưu giữ từng tầng cảm xúc, tôn vinh nét đẹp tự nhiên, ngọt ngào và đầy chất thơ của riêng bạn qua từng khung hình nghệ thuật.
+            </p>
+            <div className="pt-2 flex items-center gap-3">
+              <a
+                href="https://www.facebook.com/profile.php?id=61550731514182"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook Fanpage"
+                className="w-9 h-9 rounded-full bg-[#FFFDF9] border border-[#EFE8DC] flex items-center justify-center text-[#2E2728] hover:bg-[#C89D7C] hover:text-white hover:border-[#C89D7C] transition-all duration-300"
+              >
+                <FacebookOutlined className="text-base" />
+              </a>
+              <a
+                href="tel:0978856063"
+                aria-label="Hotline"
+                className="w-9 h-9 rounded-full bg-[#FFFDF9] border border-[#EFE8DC] flex items-center justify-center text-[#2E2728] hover:bg-[#C89D7C] hover:text-white hover:border-[#C89D7C] transition-all duration-300"
+              >
+                <PhoneOutlined className="text-base" />
+              </a>
+              <a
+                href="https://zalo.me/0978856063"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Zalo"
+                className="h-9 px-3 rounded-full bg-[#FFFDF9] border border-[#EFE8DC] flex items-center justify-center text-xs font-semibold text-[#2E2728] hover:bg-[#C89D7C] hover:text-white hover:border-[#C89D7C] transition-all duration-300"
+              >
+                Zalo
+              </a>
+            </div>
+          </div>
+
+          {/* Cột 2: Điều hướng */}
+          <div className="md:col-span-3 space-y-3">
+            <h3 className="text-xs font-semibold tracking-widest uppercase text-[#C89D7C]">
+              Danh mục
+            </h3>
+            <ul className="space-y-2.5 text-sm text-[#2E2728]/80 font-light">
+              {[
+                { href: '#hero', label: 'Trang chủ' },
+                { href: '#about', label: 'Về chúng tôi' },
+                { href: '#concepts', label: 'Concept nghệ thuật' },
+                { href: '#workflow', label: 'Quy trình chụp' },
+                { href: '#pricing', label: 'Bảng giá & Đặt lịch' },
+              ].map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="hover:text-[#C89D7C] hover:translate-x-1 inline-block transition-all duration-200"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Cột 3: Liên hệ Studio */}
+          <div className="md:col-span-4 space-y-3">
+            <h3 className="text-xs font-semibold tracking-widest uppercase text-[#C89D7C]">
+              Studio TP. Hồ Chí Minh
+            </h3>
+            <ul className="space-y-3 text-sm text-[#2E2728]/80 font-light">
+              <li className="flex items-start gap-2.5">
+                <EnvironmentOutlined className="text-base text-[#C89D7C] mt-0.5" />
+                <span>
+                  Tọa độ Studio Lychee Layers: 10.7475968, 106.7218922, TP. Hồ Chí Minh
+                </span>
+              </li>
+              <li>
+                <a
+                  href="tel:0978856063"
+                  className="flex items-center gap-2.5 hover:text-[#C89D7C] transition-colors"
+                >
+                  <PhoneOutlined className="text-base text-[#C89D7C]" />
+                  <span className="font-medium text-[#2E2728]">097 885 60 63</span> (Zalo / Hotline)
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/profile.php?id=61550731514182"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 hover:text-[#C89D7C] transition-colors"
+                >
+                  <FacebookOutlined className="text-base text-[#C89D7C]" />
+                  <span>Lychee Layers Studio Fanpage</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bản quyền & Lên đầu trang */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-[#2E2728]/60 font-light gap-3">
+          <div className="flex items-center gap-1.5">
+            <span>© {new Date().getFullYear()} Lychee Layers Studio. All rights reserved. Crafted with</span>
+            <HeartFilled className="text-[#B77B82] text-xs" />
+          </div>
+          <button
+            onClick={scrollToTop}
+            className="group hover:text-[#C89D7C] transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+          >
+            <span className="inline-block transition-transform duration-300 group-hover:-translate-y-1">
+              ↑
+            </span>
+            <span>Lên đầu trang</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+export default Footer
