@@ -8,7 +8,7 @@ const HeroBanner = () => {
         >
             {/* Ảnh nền Full Màn Hình */}
             <Image
-                src="/images/banner2.jpg"
+                src="/images/banner3.jpg"
                 alt="Lychee Layers Studio Banner"
                 fill
                 priority
