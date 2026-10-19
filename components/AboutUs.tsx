@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
+import { revealDelay } from './reveal'
 
 const AboutUs = () => {
     return (
@@ -13,7 +14,8 @@ const AboutUs = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
                         {/* Content bên trái */}
                         <div className="order-1 lg:order-1 px-6 sm:px-10 lg:pl-12 lg:pr-16 xl:pl-24 xl:pr-24 2xl:pl-36 flex justify-end items-center">
-                            <div className="max-w-xl xl:max-w-2xl w-full space-y-5 lg:space-y-6 py-6 lg:py-12">
+                            <div data-reveal="left" className="max-w-xl xl:max-w-2xl w-full space-y-5 lg:space-y-6 py-6 lg:py-12">
+                                <div data-reveal="grow-x" style={revealDelay(300)} className="h-[2px] w-14 rounded-full bg-[#C08081]" />
                                 <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#2E2728] font-normal leading-[1.3] tracking-tight">
                                     Studio 4 concept – 1 địa điểm, <span className="italic text-[#A65B64]">không phải chạy show</span> nhiều nơi
                                 </h3>
@@ -24,37 +26,38 @@ const AboutUs = () => {
                         </div>
 
                         {/* Ảnh minh họa sát mép phải màn hình (không border, không rounded, không zoom) */}
-                        <div className="relative order-2 lg:order-2 w-full h-[380px] sm:h-[480px] lg:h-[540px] xl:h-[600px] overflow-hidden">
+                        <div data-reveal="right" style={revealDelay(150)} className="relative order-2 lg:order-2 w-full h-[380px] sm:h-[480px] lg:h-[540px] xl:h-[600px] overflow-hidden">
                             <Image
                                 src="/images/aboutus1.jpg"
                                 alt="Studio 4 concept tại Lychee Layers"
                                 fill
                                 sizes="(max-width: 1024px) 100vw, 50vw"
-                                className="object-cover"
+                                className="reveal-zoom object-cover"
                             />
                             {/* Cạnh Trái (tiếp giáp với text) */}
-                            <div className="pointer-events-none absolute inset-y-0 left-0 w-32 sm:w-48 lg:w-64 xl:w-80 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/70 to-transparent z-10" />
+                            <div className="pointer-events-none absolute inset-y-0 left-0 hidden lg:block w-32 sm:w-48 lg:w-64 xl:w-80 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/70 to-transparent z-10" />
                         </div>
                     </div>
 
                     {/* Phần dưới: Ảnh minh họa sát mép trái màn hình, Content bên phải */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
                         {/* Ảnh minh họa sát mép trái màn hình (không border, không rounded, không zoom) */}
-                        <div className="relative order-2 lg:order-1 w-full h-[380px] sm:h-[480px] lg:h-[540px] xl:h-[600px] overflow-hidden">
+                        <div data-reveal="left" style={revealDelay(150)} className="relative order-2 lg:order-1 w-full h-[380px] sm:h-[480px] lg:h-[540px] xl:h-[600px] overflow-hidden">
                             <Image
                                 src="/images/aboutus2.jpg"
                                 alt="Thiết bị studio chuyên nghiệp tại Lychee Layers"
                                 fill
                                 sizes="(max-width: 1024px) 100vw, 50vw"
-                                className="object-cover"
+                                className="reveal-zoom object-cover"
                             />
                             {/* Cạnh Phải (tiếp giáp với text) */}
-                            <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-48 lg:w-64 xl:w-80 bg-gradient-to-l from-[#FFFDF9] via-[#FFFDF9]/70 to-transparent z-10" />
+                            <div className="pointer-events-none absolute inset-y-0 right-0 hidden lg:block w-32 sm:w-48 lg:w-64 xl:w-80 bg-gradient-to-l from-[#FFFDF9] via-[#FFFDF9]/70 to-transparent z-10" />
                         </div>
 
                         {/* Content bên phải */}
                         <div className="order-1 lg:order-2 px-6 sm:px-10 lg:pr-12 lg:pl-16 xl:pr-24 xl:pl-24 2xl:pr-36 flex justify-start items-center">
-                            <div className="max-w-xl xl:max-w-2xl w-full space-y-5 lg:space-y-6 py-6 lg:py-12">
+                            <div data-reveal="right" className="max-w-xl xl:max-w-2xl w-full space-y-5 lg:space-y-6 py-6 lg:py-12">
+                                <div data-reveal="grow-x" style={revealDelay(300)} className="h-[2px] w-14 rounded-full bg-[#C08081]" />
                                 <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#2E2728] font-normal leading-[1.3] tracking-tight">
                                     Thiết bị studio <span className="italic text-[#A65B64]">chuyên nghiệp &amp; đầy đủ</span>
                                 </h3>

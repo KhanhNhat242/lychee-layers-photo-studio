@@ -10,6 +10,8 @@ import {
   InstagramOutlined,
   HeartFilled,
 } from '@ant-design/icons'
+import { EdgeDecor, FlowerStems, CameraSketch } from './SectionDecor'
+import { revealDelay } from './reveal'
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -17,11 +19,17 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-[#F2D1D1] text-[#2E2728] pt-16 sm:pt-20 pb-10 border-t border-[#EFE8DC] selection:text-white">
+    <footer id='contact-us' className="relative isolate overflow-hidden bg-[#F2D1D1] text-[#2E2728] pt-16 sm:pt-20 pb-10 border-t border-[#EFE8DC] selection:text-white">
+      <EdgeDecor
+        left={<FlowerStems />}
+        right={<CameraSketch />}
+        colorClassName="text-[#B77B82]/45"
+        sizeClassName="w-24 xl:w-32 2xl:w-40"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-[#EFE8DC]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-14">
           {/* Cột 1: Thương hiệu */}
-          <div className="md:col-span-5 space-y-4">
+          <div data-reveal="up" className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full overflow-hidden border border-[#C89D7C]/50 relative">
                 <Image
@@ -74,7 +82,7 @@ const Footer = () => {
           </div>
 
           {/* Cột 2: Điều hướng */}
-          <div className="md:col-span-3 space-y-3">
+          <div data-reveal="up" style={revealDelay(150)} className="md:col-span-3 space-y-3">
             <h3 className="text-xs font-semibold tracking-widest uppercase text-[#C89D7C]">
               Danh mục
             </h3>
@@ -98,7 +106,7 @@ const Footer = () => {
           </div>
 
           {/* Cột 3: Liên hệ Studio */}
-          <div className="md:col-span-4 space-y-3">
+          <div data-reveal="up" style={revealDelay(300)} className="md:col-span-4 space-y-3">
             <h3 className="text-xs font-semibold tracking-widest uppercase text-[#C89D7C]">
               Thông tin liên hệ
             </h3>
@@ -155,8 +163,11 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Đường phân cách kéo dài từ giữa ra */}
+        <div data-reveal="grow-c" style={revealDelay(200)} className="h-px bg-[#EFE8DC]" />
+
         {/* Bản quyền & Lên đầu trang */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-[#2E2728]/60 font-light gap-3">
+        <div data-reveal="" style={revealDelay(450)} className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-[#2E2728]/60 font-light gap-3">
           <div className="flex items-center gap-1.5">
             <span>© {new Date().getFullYear()} Lychee Layers Studio. All rights reserved. Crafted with</span>
             <HeartFilled className="text-[#B77B82] text-xs" />

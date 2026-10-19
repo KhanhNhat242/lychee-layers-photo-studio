@@ -2,6 +2,8 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import { CloseOutlined, CheckOutlined, EnvironmentOutlined } from '@ant-design/icons'
 import ConceptCarousel from './ConceptCarousel'
+import { revealDelay } from './reveal'
+import { EdgeDecor, LycheeBranch, ApertureSparkle } from './SectionDecor'
 
 // Dữ liệu 4 Concept nổi bật theo thiết kế
 const highlightConcepts = [
@@ -130,20 +132,28 @@ const Service = () => {
         <div>
             <section
                 id="service"
-                className="py-24 sm:py-32 lg:py-20 bg-[#FAF8F5] relative border-t border-[#EFE8DC]"
+                className="py-24 sm:py-32 lg:py-20 bg-[#FAF8F5] relative isolate overflow-hidden border-t border-[#EFE8DC]"
             >
+                <EdgeDecor
+                    left={<LycheeBranch />}
+                    right={<ApertureSparkle />}
+                    colorClassName="text-[#C08081]/30"
+                />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Header section */}
                     <div className="text-center space-y-3 mb-10">
-                        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#2E2728]">
+                        <h2 data-reveal="blur" className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#2E2728]">
                             Những Concept Được Yêu Thích
                         </h2>
+                        <div data-reveal="grow-c" style={revealDelay(250)} className="mx-auto h-[2px] w-16 rounded-full bg-[#C08081]" />
                     </div>
 
-                    <ConceptCarousel concepts={highlightConcepts} onSelect={setSelectedConcept} />
+                    <div data-reveal="up" style={revealDelay(200)}>
+                        <ConceptCarousel concepts={highlightConcepts} onSelect={setSelectedConcept} />
+                    </div>
 
                     {/* CTA nhỏ phía dưới */}
-                    <div className="mt-5 text-center">
+                    <div data-reveal="up" style={revealDelay(350)} className="mt-5 text-center">
                         <a
                             href="#booking"
                             className="inline-flex items-center gap-2 text-sm text-[#C89D7C] hover:text-[#B88D6C] font-medium tracking-wide transition-colors group"
@@ -229,10 +239,11 @@ const Service = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Header section */}
                     <div className="text-center max-w-2xl mx-auto space-y-3 mb-16 sm:mb-20 selection:text-white">
-                        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#2E2728]">
+                        <h2 data-reveal="blur" className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#2E2728]">
                             Bảng giá & Đặt lịch
                         </h2>
-                        <p className="text-sm sm:text-base text-[#2E2728]/75 font-light">
+                        <div data-reveal="grow-c" style={revealDelay(250)} className="mx-auto h-[2px] w-16 rounded-full bg-[#C08081]" />
+                        <p data-reveal="up" style={revealDelay(350)} className="text-sm sm:text-base text-[#2E2728]/75 font-light">
                             Chọn gói chụp của bạn & Để lại thông tin, Lychee Layers sẽ liên hệ bạn ngay trong 15-30 phút.
                         </p>
                     </div>
@@ -242,16 +253,18 @@ const Service = () => {
                         {/* Phần bên trái: 3 Cột bảng giá (Lite, Standard, VIP) */}
                         <div className="lg:col-span-7">
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                                {pricingPlans.map((plan) => (
+                                {pricingPlans.map((plan, planIdx) => (
                                     <div
                                         key={plan.id}
+                                        data-reveal="flip"
+                                        style={revealDelay(planIdx * 150)}
                                         className={`relative rounded-3xl p-6 transition-all duration-300 flex flex-col justify-between ${plan.popular
                                             ? 'bg-[#FFFDF9] border-2 border-[#C89D7C] shadow-[0_12px_36px_rgba(200,157,124,0.18)] scale-100 md:-translate-y-2'
                                             : 'bg-[#FFFDF9]/80 border border-[#EFE8DC] shadow-[0_6px_20px_rgba(200,157,124,0.05)]'
                                             }`}
                                     >
                                         {plan.popular && (
-                                            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#C89D7C] text-white text-[10px] tracking-wider uppercase font-semibold px-3 py-1 rounded-full shadow-sm">
+                                            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#C89D7C] text-white text-[10px] tracking-wider uppercase font-semibold px-3 py-1 rounded-full shadow-sm">
                                                 Được chọn nhiều
                                             </div>
                                         )}
@@ -295,7 +308,7 @@ const Service = () => {
                         </div>
 
                         {/* Phần bên phải: Form đăng ký đặt lịch gọn gàng + Bản đồ Studio nhỏ */}
-                        <div id="booking" className="lg:col-span-5 scroll-mt-24">
+                        <div id="booking" data-reveal="right" style={revealDelay(300)} className="lg:col-span-5 scroll-mt-24">
                             <div className="bg-[#FFFDF9] rounded-3xl p-6 sm:p-8 border border-[#EFE8DC] shadow-[0_15px_45px_rgba(200,157,124,0.1)]">
                                 {/* Studio mini card + Google map preview */}
                                 <div className="mb-6 p-3 rounded-2xl bg-[#FAF8F5] border border-[#EFE8DC] flex items-center gap-3.5">
@@ -314,10 +327,7 @@ const Service = () => {
                                         </div>
                                         <div className="text-[#2E2728]/70 flex items-center gap-1 font-light">
                                             <EnvironmentOutlined className="text-[#C89D7C]" />
-                                            <span>TP. Hồ Chí Minh (10.7475968, 106.7218922)</span>
-                                        </div>
-                                        <div className="text-[#C89D7C] text-[11px] font-medium">
-                                            Hotline/Zalo: 097 885 60 63
+                                            <span>TP. Hồ Chí Minh</span>
                                         </div>
                                     </div>
                                 </div>

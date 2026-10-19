@@ -7,6 +7,7 @@ import HeroBanner from '@/components/HeroBanner'
 import AboutUs from '@/components/AboutUs'
 import Service from '@/components/Service'
 import Collection from '@/components/Collection'
+import RevealOnScroll from '@/components/RevealOnScroll'
 
 
 export default function Home() {
@@ -31,6 +32,9 @@ export default function Home() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Kích hoạt hiệu ứng [data-reveal] khi cuộn */}
+      <RevealOnScroll />
     </div>
   )
 }

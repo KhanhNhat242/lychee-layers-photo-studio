@@ -7,19 +7,28 @@ import Image from 'next/image'
 interface NavItem {
   label: string
   href: string
+  /** Các section khác cũng làm sáng mục này khi cuộn tới */
+  extraSections?: string[]
 }
 
 const navItems: NavItem[] = [
   { label: 'Trang chủ', href: '#hero' },
   { label: 'Về chúng tôi', href: '#about-us' },
-  { label: 'Dịch vụ', href: '#service' },
+  { label: 'Dịch vụ', href: '#service', extraSections: ['pricing'] },
   { label: 'Bộ sưu tập', href: '#collection' },
-  { label: 'Liên hệ', href: '#contact' },
+  { label: 'Liên hệ', href: '#contact-us' },
 ]
+
+// Danh sách [id section, href mục nav tương ứng]
+const sectionTargets = navItems.flatMap((item) => [
+  [item.href.slice(1), item.href],
+  ...(item.extraSections ?? []).map((id) => [id, item.href]),
+])
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [activeHref, setActiveHref] = useState(navItems[0].href)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +43,16 @@ const Header = () => {
       } else {
         setIsScrolled(window.scrollY > 30)
       }
+
+      // Section đang active: section cuối cùng có mép trên đã vượt qua vạch 1/3 màn hình (tính từ dưới header)
+      const line = headerHeight + window.innerHeight / 3
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
+      let current = navItems[0].href
+      for (const [id, href] of sectionTargets) {
+        const section = document.getElementById(id)
+        if (section && (atBottom || section.getBoundingClientRect().top <= line)) current = href
+      }
+      setActiveHref(current)
     }
 
     handleScroll()
@@ -97,21 +116,25 @@ const Header = () => {
 
           {/* Menu điều hướng ở giữa */}
           <nav className="hidden md:flex items-center space-x-8 lg:space-x-10">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={(e) => scrollToSection(e, item.href)}
-                className={`text-sm tracking-wide relative group py-1 transition-all duration-300 ${isScrolled
-                  ? 'text-[#2E2728]/80 hover:text-[#C89D7C] font-normal'
-                  : 'text-[#1F1A1B] hover:text-[#A65B64] font-medium drop-shadow-[0_1px_8px_rgba(255,253,249,0.95)]'
-                  }`}
-              >
-                {item.label}
-                <span className={`absolute bottom-0 left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full rounded-full ${isScrolled ? 'bg-[#C89D7C]' : 'bg-[#A65B64]'
-                  }`} />
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const isActive = item.href === activeHref
+              return (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => scrollToSection(e, item.href)}
+                  aria-current={isActive ? 'location' : undefined}
+                  className={`text-sm tracking-wide relative group py-1 transition-all duration-300 ${isScrolled
+                    ? `${isActive ? 'text-[#C89D7C]' : 'text-[#2E2728]/80'} hover:text-[#C89D7C] font-normal`
+                    : `${isActive ? 'text-[#A65B64]' : 'text-[#1F1A1B]'} hover:text-[#A65B64] font-medium drop-shadow-[0_1px_8px_rgba(255,253,249,0.95)]`
+                    }`}
+                >
+                  {item.label}
+                  <span className={`absolute bottom-0 left-0 h-[2px] transition-all duration-300 group-hover:w-full rounded-full ${isActive ? 'w-full' : 'w-0'} ${isScrolled ? 'bg-[#C89D7C]' : 'bg-[#A65B64]'
+                    }`} />
+                </a>
+              )
+            })}
           </nav>
 
           {/* Nút Đặt lịch ngay bên phải */}
@@ -177,7 +200,9 @@ const Header = () => {
                   key={item.label}
                   href={item.href}
                   onClick={(e) => scrollToSection(e, item.href)}
-                  className="px-3 py-2 text-sm text-[#2E2728] hover:bg-[#F3EDE2] rounded-lg transition-colors font-medium"
+                  aria-current={item.href === activeHref ? 'location' : undefined}
+                  className={`px-3 py-2 text-sm hover:bg-[#F3EDE2] rounded-lg transition-colors font-medium ${item.href === activeHref ? 'bg-[#F3EDE2] text-[#A65B64]' : 'text-[#2E2728]'
+                    }`}
                 >
                   {item.label}
                 </a>

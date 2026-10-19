@@ -1,8 +1,11 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { CloseOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons'
+import { EdgeDecor, FilmStrip, FlowerStems } from './SectionDecor'
+import { revealDelay } from './reveal'
 
 const photos = [
     '/images/library/764975781_17983487451061701_3636045946579933472_n.jpg',
@@ -74,14 +77,16 @@ const Collection = () => {
     }, [isOpen, close, next, prev])
 
     return (
-        <section id="collection" className="py-20 sm:py-24 bg-[#FAF8F5]">
+        <section id="collection" className="py-20 sm:py-24 bg-[#FAF8F5] relative isolate overflow-hidden">
+            <EdgeDecor left={<FilmStrip />} right={<FlowerStems />} colorClassName="text-[#C08081]/30" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header section */}
                 <div className="text-center space-y-3 mb-12 sm:mb-16">
-                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#2E2728]">
+                    <h2 data-reveal="blur" className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#2E2728]">
                         Bộ Sưu Tập
                     </h2>
-                    <p className="text-sm sm:text-base text-[#2E2728]/70 font-light">
+                    <div data-reveal="grow-c" style={revealDelay(250)} className="mx-auto h-[2px] w-16 rounded-full bg-[#C08081]" />
+                    <p data-reveal="up" style={revealDelay(350)} className="text-sm sm:text-base text-[#2E2728]/70 font-light">
                         Những khoảnh khắc nghệ thuật được lưu giữ tại Lychee Layers Studio
                     </p>
                 </div>
@@ -93,6 +98,8 @@ const Collection = () => {
                             key={src}
                             onClick={() => setActiveIndex(i)}
                             aria-label={`Xem ảnh ${i + 1}`}
+                            data-reveal="up"
+                            style={revealDelay(i * 90)}
                             className={`group relative overflow-hidden rounded-2xl bg-[#EFE8DC] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#C08081] ${gridCells[i]}`}
                         >
                             <Image
@@ -110,6 +117,8 @@ const Collection = () => {
                     {total > previewCount && (
                         <button
                             onClick={() => setActiveIndex(previewCount)}
+                            data-reveal="up"
+                            style={revealDelay(previewCount * 90)}
                             className={`group relative overflow-hidden rounded-2xl bg-[#EFE8DC] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#C08081] ${moreCell}`}
                         >
                             <Image
@@ -129,8 +138,8 @@ const Collection = () => {
                 </div>
             </div>
 
-            {/* Popup xem ảnh lớn */}
-            {isOpen && (
+            {/* Popup xem ảnh lớn – render vào body để không bị giới hạn bởi stacking context (isolate) của section */}
+            {isOpen && createPortal(
                 <div
                     role="dialog"
                     aria-modal="true"
@@ -201,7 +210,8 @@ const Collection = () => {
                     >
                         <RightOutlined />
                     </button>
-                </div>
+                </div>,
+                document.body
             )}
         </section>
     )
