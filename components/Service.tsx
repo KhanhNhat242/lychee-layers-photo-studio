@@ -243,9 +243,6 @@ const Service = () => {
                             Bảng giá & Đặt lịch
                         </h2>
                         <div data-reveal="grow-c" style={revealDelay(250)} className="mx-auto h-[2px] w-16 rounded-full bg-[#C08081]" />
-                        <p data-reveal="up" style={revealDelay(350)} className="text-sm sm:text-base text-[#2E2728]/75 font-light">
-                            Chọn gói chụp của bạn & Để lại thông tin, Lychee Layers sẽ liên hệ bạn ngay trong 15-30 phút.
-                        </p>
                     </div>
 
                     {/* Bố cục chia 2 phần lớn song song */}

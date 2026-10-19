@@ -5,7 +5,7 @@ const HeroBanner = () => {
     return (
         <section
             id="hero"
-            className="relative isolate min-h-svh flex items-center justify-center overflow-hidden pt-28 pb-14 sm:pt-32 sm:pb-16 lg:pt-28 lg:pb-14 xl:pt-32 xl:pb-16"
+            className="relative isolate min-h-[min(100svh,900px)] flex items-center justify-center overflow-hidden pt-28 pb-14 sm:pt-32 sm:pb-16 lg:pt-28 lg:pb-14 xl:pt-32 xl:pb-16"
         >
             {/* Ảnh nền Full Màn Hình – hiện dần và "lắng" từ phóng to về đúng cỡ */}
             <div data-reveal="" className="absolute inset-0 -z-10 overflow-hidden">
