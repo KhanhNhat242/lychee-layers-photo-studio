@@ -86,31 +86,18 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo nghệ thuật bên trái */}
           <Link
-            href="/"
+            href="#hero"
+            onClick={(e) => scrollToSection(e, '#hero')}
             className="group flex items-center gap-2.5 transition-opacity hover:opacity-90"
           >
-            <div className={`w-8 h-8 rounded-full overflow-hidden relative flex-shrink-0 transition-colors duration-300 ${isScrolled ? 'border border-[#C89D7C]/40' : 'border border-[#A65B64]/50 shadow-xs'
-              }`}>
+            <div className={`w-50 h-8 overflow-hidden relative flex-shrink-0 transition-colors duration-300`}>
               <Image
-                src="/images/logo-img.jpg"
+                src="/images/mainlogo-Photoroom.svg"
                 alt="Lychee Layers Logo"
                 fill
                 sizes="32px"
-                className="object-cover"
                 priority
               />
-            </div>
-            <div className="flex flex-col">
-              <span className={`font-serif text-xl sm:text-2xl tracking-wide transition-colors duration-300 ${isScrolled
-                ? 'text-[#2E2728] font-normal'
-                : 'text-[#1F1A1B] font-medium drop-shadow-[0_1px_8px_rgba(255,253,249,0.9)]'
-                }`}>
-                Lychee Layers
-              </span>
-              <span className={`text-[9px] tracking-[0.22em] uppercase -mt-1 font-semibold transition-colors duration-300 ${isScrolled ? 'text-[#C89D7C]' : 'text-[#A65B64]'
-                }`}>
-                Artistic Studio
-              </span>
             </div>
           </Link>
 

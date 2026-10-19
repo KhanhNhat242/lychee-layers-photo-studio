@@ -256,7 +256,8 @@ const Service = () => {
                                         data-reveal="flip"
                                         style={revealDelay(planIdx * 150)}
                                         className={`relative rounded-3xl p-6 transition-all duration-300 flex flex-col justify-between ${plan.popular
-                                            ? 'bg-[#FFFDF9] border-2 border-[#C89D7C] shadow-[0_12px_36px_rgba(200,157,124,0.18)] scale-100 md:-translate-y-2'
+                                            // Vầng sáng gradient toả ra ngoài: hồng đào phía trên-trái → hồng đất phía dưới-phải
+                                            ? 'bg-[#FFFDF9] border-2 border-[#C89D7C] z-10 shadow-[-16px_-18px_50px_-4px_rgba(232,165,152,0.95),18px_22px_56px_-4px_rgba(183,123,130,0.9),0_0_90px_10px_rgba(192,128,129,0.45)] scale-100 md:-translate-y-2'
                                             : 'bg-[#FFFDF9]/80 border border-[#EFE8DC] shadow-[0_6px_20px_rgba(200,157,124,0.05)]'
                                             }`}
                                     >

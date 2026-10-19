@@ -7,52 +7,63 @@ import { CloseOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { EdgeDecor, FilmStrip, FlowerStems } from './SectionDecor'
 import { revealDelay } from './reveal'
 
+// Kích thước gốc (px) của từng ảnh để hiển thị đúng tỉ lệ, không bị cắt
 const photos = [
-    '/images/library/764975781_17983487451061701_3636045946579933472_n.jpg',
-    '/images/library/765652706_17983487487061701_1719604522210793188_n.jpg',
-    '/images/library/766075491_17983487478061701_6713944062424248304_n.jpg',
-    '/images/library/766075495_17983487520061701_1222515516559665240_n.jpg',
-    '/images/library/766317124_17983487592061701_4439795435283454152_n.jpg',
-    '/images/library/767244076_17983487529061701_4187325223144733272_n.jpg',
-    '/images/library/767743922_17983487538061701_8594507113150659238_n.jpg',
-    '/images/library/767819370_17983487496061701_6860743269219180509_n.jpg',
-    '/images/library/768577341_17983487469061701_5334452822886529234_n.jpg',
-    '/images/library/768662759_17983487460061701_7633468563299443607_n.jpg',
-    '/images/library/774668663_17985404445061701_6311156792851912271_n.jpg',
-    '/images/library/775245328_17985404463061701_5295672598680562023_n.jpg',
-    '/images/library/776165610_17985404475061701_8767142822172335926_n.jpg',
-    '/images/library/776497217_17985404436061701_343478812626197170_n.jpg',
-    '/images/library/776553833_17985404532061701_3666223100271374980_n.jpg',
-    '/images/library/778426496_17985404454061701_7225558674345568160_n.jpg',
-    '/images/library/778426756_17985905142061701_4490819478481575903_n.jpg',
-    '/images/library/778543520_17985404493061701_3900758443217201685_n.jpg',
-    '/images/library/779167700_17985905163061701_4689542155376248204_n.jpg',
-    '/images/library/779167721_17985905190061701_4160320773148136325_n.jpg',
-    '/images/library/779167726_17985905205061701_2844090817971469752_n.jpg',
-    '/images/library/779167733_17985905124061701_3259760987923221280_n.jpg',
-    '/images/library/780127522_17985905139061701_9159119217931105096_n.jpg',
-    '/images/library/780140088_17985404499061701_946340651558657246_n.jpg',
-    '/images/library/782413399_17985905166061701_8237293039032008484_n.jpg',
+    { src: '/images/library/764975781_17983487451061701_3636045946579933472_n.jpg', width: 1639, height: 2048 },
+    { src: '/images/library/765652706_17983487487061701_1719604522210793188_n.jpg', width: 1639, height: 2048 },
+    { src: '/images/library/766075491_17983487478061701_6713944062424248304_n.jpg', width: 1639, height: 2048 },
+    { src: '/images/library/766075495_17983487520061701_1222515516559665240_n.jpg', width: 1639, height: 2048 },
+    { src: '/images/library/766317124_17983487592061701_4439795435283454152_n.jpg', width: 1921, height: 2401 },
+    { src: '/images/library/767244076_17983487529061701_4187325223144733272_n.jpg', width: 1639, height: 2048 },
+    { src: '/images/library/767743922_17983487538061701_8594507113150659238_n.jpg', width: 1639, height: 2048 },
+    { src: '/images/library/767819370_17983487496061701_6860743269219180509_n.jpg', width: 1638, height: 2047 },
+    { src: '/images/library/768577341_17983487469061701_5334452822886529234_n.jpg', width: 1639, height: 2048 },
+    { src: '/images/library/768662759_17983487460061701_7633468563299443607_n.jpg', width: 1639, height: 2048 },
+    { src: '/images/library/774668663_17985404445061701_6311156792851912271_n.jpg', width: 1290, height: 1720 },
+    { src: '/images/library/775245328_17985404463061701_5295672598680562023_n.jpg', width: 1290, height: 1712 },
+    { src: '/images/library/776165610_17985404475061701_8767142822172335926_n.jpg', width: 1290, height: 1717 },
+    { src: '/images/library/776497217_17985404436061701_343478812626197170_n.jpg', width: 1290, height: 1720 },
+    { src: '/images/library/776553833_17985404532061701_3666223100271374980_n.jpg', width: 1290, height: 1720 },
+    { src: '/images/library/778426496_17985404454061701_7225558674345568160_n.jpg', width: 1290, height: 1720 },
+    { src: '/images/library/778426756_17985905142061701_4490819478481575903_n.jpg', width: 1290, height: 1703 },
+    { src: '/images/library/778543520_17985404493061701_3900758443217201685_n.jpg', width: 1290, height: 1720 },
+    { src: '/images/library/779167700_17985905163061701_4689542155376248204_n.jpg', width: 1290, height: 1704 },
+    { src: '/images/library/779167721_17985905190061701_4160320773148136325_n.jpg', width: 1290, height: 1701 },
+    { src: '/images/library/779167726_17985905205061701_2844090817971469752_n.jpg', width: 1290, height: 1701 },
+    { src: '/images/library/779167733_17985905124061701_3259760987923221280_n.jpg', width: 1290, height: 1708 },
+    { src: '/images/library/780127522_17985905139061701_9159119217931105096_n.jpg', width: 1290, height: 1701 },
+    { src: '/images/library/780140088_17985404499061701_946340651558657246_n.jpg', width: 1290, height: 1720 },
+    { src: '/images/library/782413399_17985905166061701_8237293039032008484_n.jpg', width: 1290, height: 1708 },
 ]
 
-// Vị trí từng ô trong lưới mặc định.
-// Mobile: lưới 2 cột tự xếp. Desktop (md+): lưới 4 cột x 6 hàng giống bố cục mẫu.
-const gridCells = [
-    'row-span-2 md:col-start-1 md:row-start-1 md:row-span-4', // ảnh dọc lớn bên trái
-    'md:col-start-2 md:row-start-1 md:row-span-2', // ảnh nhỏ cột 2 - trên
-    'md:col-start-2 md:row-start-3 md:row-span-2', // ảnh nhỏ cột 2 - dưới
-    'col-span-2 row-span-2 md:col-start-3 md:row-start-1 md:col-span-2 md:row-span-3', // ảnh ngang lớn bên phải
-    'col-span-2 md:col-start-1 md:row-start-5 md:col-span-2 md:row-span-2', // ảnh ngang dưới bên trái
-    'row-span-2 md:col-start-3 md:row-start-4 md:row-span-3', // ảnh nhỏ dưới - cột 3
+// Bố cục desktop: 6 cột hình chữ V, tiêu đề nằm ở khoảng trống giữa phía dưới (cột 2–5).
+// Số đo tính theo bội số chiều rộng cột: offset = khoảng đẩy xuống, tiles = chiều cao từng ô.
+// Mọi ô có tỉ lệ rộng/cao <= 1/1.36 ≈ 0.735, hẹp hơn mọi ảnh gốc (0.75–0.8)
+// nên object-cover chỉ cắt bớt 2 bên, luôn giữ trọn chiều cao ảnh.
+const desktopColumns = [
+    { offset: 0.3, tiles: [1.42, 1.42] },
+    { offset: 0.3, tiles: [1.75] },
+    { offset: 0.05, tiles: [1.5] },
+    { offset: 0.05, tiles: [1.5] },
+    { offset: 0.3, tiles: [1.75] },
+    { offset: 0.3, tiles: [1.42, 1.42] },
 ]
-// Ô "Xem thêm" chiếm vị trí ảnh nhỏ cuối cùng (cột 4)
-const moreCell = 'row-span-2 md:col-start-4 md:row-start-4 md:row-span-3'
+
+// Tổng số ô = 8; ô cuối cùng (cột phải, dưới) là nút "Xem thêm"
+const TILE_COUNT = desktopColumns.reduce((n, c) => n + c.tiles.length, 0)
+const PREVIEW_COUNT = TILE_COUNT - 1
+
+// Gán ảnh lần lượt vào từng cột desktop (cột 1 nhận ảnh 0-1, cột 2 nhận 2-3, ...)
+const columnsWithPhotos = desktopColumns.map((col, c) => {
+    const start = desktopColumns.slice(0, c).reduce((n, prev) => n + prev.tiles.length, 0)
+    return { ...col, indices: col.tiles.map((_, t) => start + t) }
+})
 
 const Collection = () => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null)
     const touchX = useRef<number | null>(null)
     const total = photos.length
-    const previewCount = gridCells.length
+    const previewCount = PREVIEW_COUNT
     const isOpen = activeIndex !== null
 
     const close = useCallback(() => setActiveIndex(null), [])
@@ -76,65 +87,94 @@ const Collection = () => {
         }
     }, [isOpen, close, next, prev])
 
+    const tileClass =
+        'group relative block w-full overflow-hidden rounded-2xl bg-[#EFE8DC] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#C08081]'
+
+    // Một ô ảnh (hoặc ô "Xem thêm" khi index === previewCount); kích thước do className/style của ô quyết định
+    const renderTile = (index: number, extra: { className?: string; style?: React.CSSProperties; sizes: string; delay: number }) => {
+        const photo = photos[index]
+        const isMore = index === previewCount
+        return (
+            <button
+                key={photo.src}
+                onClick={() => setActiveIndex(index)}
+                aria-label={isMore ? `Xem thêm ${total - previewCount} ảnh` : `Xem ảnh ${index + 1}`}
+                data-reveal="up"
+                style={{ ...revealDelay(extra.delay), ...extra.style }}
+                className={`${tileClass} ${extra.className ?? ''}`}
+            >
+                <Image
+                    src={photo.src}
+                    alt={isMore ? '' : `Tác phẩm Lychee Layers ${index + 1}`}
+                    fill
+                    sizes={extra.sizes}
+                    className={`object-cover transition-transform duration-700 ease-out ${isMore ? 'blur-[3px] scale-110 group-hover:scale-125' : 'group-hover:scale-105'
+                        }`}
+                />
+                {isMore ? (
+                    <>
+                        <div className="absolute inset-0 bg-[#C08081]/55 group-hover:bg-[#B77B82]/65 transition-colors duration-300" />
+                        <div className="absolute inset-0 flex flex-col items-center justify-center text-white gap-1">
+                            <span className="font-serif text-2xl xl:text-3xl">+{total - previewCount}</span>
+                            <span className="text-[10px] xl:text-xs uppercase tracking-[0.2em] font-medium">Xem thêm</span>
+                        </div>
+                    </>
+                ) : (
+                    <div className="absolute inset-0 bg-[#2E2728]/0 group-hover:bg-[#2E2728]/10 transition-colors duration-300" />
+                )}
+            </button>
+        )
+    }
+
     return (
         <section id="collection" className="py-20 sm:py-24 bg-[#FAF8F5] relative isolate overflow-hidden">
             <EdgeDecor left={<FilmStrip />} right={<FlowerStems />} colorClassName="text-[#C08081]/30" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Header section */}
-                <div className="text-center space-y-3 mb-12 sm:mb-16">
-                    <h2 data-reveal="blur" className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#2E2728]">
-                        Bộ Sưu Tập
-                    </h2>
-                    <div data-reveal="grow-c" style={revealDelay(250)} className="mx-auto h-[2px] w-16 rounded-full bg-[#C08081]" />
-                    <p data-reveal="up" style={revealDelay(350)} className="text-sm sm:text-base text-[#2E2728]/70 font-light">
-                        Những khoảnh khắc nghệ thuật được lưu giữ tại Lychee Layers Studio
-                    </p>
-                </div>
-
-                {/* Lưới ảnh mặc định */}
-                <div className="grid grid-cols-2 auto-rows-[140px] sm:auto-rows-[180px] md:grid-cols-4 md:grid-rows-6 md:auto-rows-auto md:h-[600px] lg:h-[680px] gap-3 sm:gap-4">
-                    {photos.slice(0, previewCount).map((src, i) => (
-                        <button
-                            key={src}
-                            onClick={() => setActiveIndex(i)}
-                            aria-label={`Xem ảnh ${i + 1}`}
-                            data-reveal="up"
-                            style={revealDelay(i * 90)}
-                            className={`group relative overflow-hidden rounded-2xl bg-[#EFE8DC] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#C08081] ${gridCells[i]}`}
-                        >
-                            <Image
-                                src={src}
-                                alt={`Tác phẩm Lychee Layers ${i + 1}`}
-                                fill
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                            />
-                            <div className="absolute inset-0 bg-[#2E2728]/0 group-hover:bg-[#2E2728]/10 transition-colors duration-300" />
-                        </button>
-                    ))}
-
-                    {/* Nút Xem thêm - mở popup tại ảnh tiếp theo */}
-                    {total > previewCount && (
-                        <button
-                            onClick={() => setActiveIndex(previewCount)}
-                            data-reveal="up"
-                            style={revealDelay(previewCount * 90)}
-                            className={`group relative overflow-hidden rounded-2xl bg-[#EFE8DC] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#C08081] ${moreCell}`}
-                        >
-                            <Image
-                                src={photos[previewCount]}
-                                alt=""
-                                fill
-                                sizes="(max-width: 768px) 50vw, 25vw"
-                                className="object-cover blur-[3px] scale-110 transition-transform duration-700 group-hover:scale-125"
-                            />
-                            <div className="absolute inset-0 bg-[#C08081]/55 group-hover:bg-[#B77B82]/65 transition-colors duration-300" />
-                            <div className="relative h-full flex flex-col items-center justify-center text-white gap-1">
-                                <span className="font-serif text-3xl sm:text-4xl">+{total - previewCount}</span>
-                                <span className="text-xs sm:text-sm uppercase tracking-[0.2em] font-medium">Xem thêm</span>
+                <div className="relative">
+                    {/* Desktop: 8 cột hình chữ V */}
+                    <div className="hidden lg:flex items-start gap-4">
+                        {columnsWithPhotos.map((col, c) => (
+                            <div key={c} className="flex-1 min-w-0 flex flex-col gap-4">
+                                {/* Khoảng đẩy xuống, tỉ lệ theo chiều rộng cột */}
+                                <div style={{ aspectRatio: `1 / ${col.offset}` }} />
+                                {col.indices.map((index, t) =>
+                                    renderTile(index, {
+                                        style: { aspectRatio: `1 / ${col.tiles[t]}` },
+                                        sizes: '(min-width: 1280px) 210px, 17vw',
+                                        // Hiện từ giữa toả ra 2 bên
+                                        delay: Math.abs(c - 2.5) * 130 + t * 120,
+                                    })
+                                )}
                             </div>
-                        </button>
-                    )}
+                        ))}
+                    </div>
+
+                    {/* Tiêu đề: mobile nằm trên lưới; desktop nằm trong khoảng trống giữa phía dưới (cột 2–5) */}
+                    <div className="text-center space-y-3 mb-10 sm:mb-12 lg:mb-0 lg:absolute lg:bottom-35 lg:left-1/6 lg:right-1/6 lg:px-4">
+                        <span
+                            data-reveal="up"
+                            className="inline-block px-4 py-1 rounded-full border border-[#DFCDBA] bg-[#FFFDF9] text-[11px] uppercase tracking-[0.2em] text-[#B77B82] font-medium"
+                        >
+                            Lychee Layers Collection
+                        </span>
+                        <h2 data-reveal="blur" style={revealDelay(150)} className="font-serif text-3xl sm:text-4xl xl:text-5xl font-normal text-[#2E2728]">
+                            Bộ Sưu Tập
+                        </h2>
+                        <p data-reveal="up" style={revealDelay(300)} className="text-sm sm:text-base text-[#2E2728]/70 font-light">
+                            Những khoảnh khắc nghệ thuật được lưu giữ tại Lychee Layers Studio
+                        </p>
+                    </div>
+
+                    {/* Mobile / tablet: lưới đều, ô 3:4 (hẹp hơn ảnh gốc nên chỉ cắt 2 bên) */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:hidden">
+                        {Array.from({ length: TILE_COUNT }, (_, i) =>
+                            renderTile(i, {
+                                className: 'aspect-[3/4]',
+                                sizes: '(max-width: 768px) 50vw, 25vw',
+                                delay: (i % 4) * 90,
+                            })
+                        )}
+                    </div>
                 </div>
             </div>
 
@@ -179,8 +219,8 @@ const Collection = () => {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <Image
-                            key={photos[activeIndex]}
-                            src={photos[activeIndex]}
+                            key={photos[activeIndex].src}
+                            src={photos[activeIndex].src}
                             alt={`Tác phẩm Lychee Layers ${activeIndex + 1}`}
                             fill
                             sizes="100vw"

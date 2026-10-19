@@ -31,22 +31,14 @@ const Footer = () => {
           {/* Cột 1: Thương hiệu */}
           <div data-reveal="up" className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full overflow-hidden border border-[#C89D7C]/50 relative">
+              <div className={`w-50 h-8 overflow-hidden relative flex-shrink-0 transition-colors duration-300`}>
                 <Image
-                  src="/images/logo-img.jpg"
-                  alt="Lychee Layers Studio"
+                  src="/images/mainlogo-Photoroom.svg"
+                  alt="Lychee Layers Logo"
                   fill
-                  sizes="40px"
-                  className="object-cover"
+                  sizes="32px"
+                  priority
                 />
-              </div>
-              <div>
-                <span className="font-serif text-2xl font-normal tracking-wide text-[#2E2728] block">
-                  Lychee Layers
-                </span>
-                <span className="text-[10px] tracking-[0.25em] text-[#C89D7C] uppercase block font-medium">
-                  Artistic & Portrait Studio
-                </span>
               </div>
             </div>
             <p className="text-sm text-[#2E2728]/75 leading-relaxed max-w-md font-light">
