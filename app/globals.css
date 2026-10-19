@@ -41,6 +41,13 @@ body {
   color: var(--foreground);
 }
 
+/* Chặn tràn ngang (vd. phần tử data-reveal="left/right" đang dịch ra ngoài trước khi hiện)
+   – dùng clip thay vì hidden để không tạo vùng cuộn mới, không làm hỏng position: sticky */
+html,
+body {
+  overflow-x: clip;
+}
+
 /* Smooth transitions */
 * {
   border-color: #EFE8DC;
