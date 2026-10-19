@@ -139,6 +139,23 @@ body {
   transform-origin: bottom center;
 }
 
+/* Ảnh lớn trong popup bộ sưu tập hiện dần khi chuyển ảnh */
+@keyframes lightbox-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.lightbox-fade {
+  animation: lightbox-fade 0.3s ease-out;
+}
+
 @media (scripting: none) {
   [data-reveal] {
     opacity: 1;
@@ -160,7 +177,8 @@ body {
     transition: none;
   }
 
-  .deco-float {
+  .deco-float,
+  .lightbox-fade {
     animation: none;
   }
 }

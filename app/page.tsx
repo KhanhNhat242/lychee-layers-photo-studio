@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import HeroBanner from '@/components/HeroBanner'
 import AboutUs from '@/components/AboutUs'
 import Service from '@/components/Service'
+import Collection from '@/components/Collection'
 
 
 export default function Home() {
@@ -25,8 +26,7 @@ export default function Home() {
         {/* 📸 SECTION 3: CONCEPT NỔI BẬT (Highlights - Lưới so le / Masonry nhẹ, tạo cảm giác triển lãm) */}
         <Service />
 
-        {/* 🏷️ SECTION 5: BẢNG GIÁ & ĐẶT LỊCH (Pricing & Booking - Thoáng, chia 2 phần song song) */}
-
+        <Collection />
       </main>
 
       {/* Footer */}

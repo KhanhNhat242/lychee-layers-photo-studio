@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { CloseOutlined, CheckOutlined, EnvironmentOutlined } from '@ant-design/icons'
+import ConceptCarousel from './ConceptCarousel'
 
 // Dữ liệu 4 Concept nổi bật theo thiết kế
 const highlightConcepts = [
@@ -128,73 +129,21 @@ const Service = () => {
     return (
         <div>
             <section
-                id="concepts"
-                className="py-24 sm:py-32 lg:py-36 bg-[#FAF8F5] relative border-t border-[#EFE8DC]"
+                id="service"
+                className="py-24 sm:py-32 lg:py-20 bg-[#FAF8F5] relative border-t border-[#EFE8DC]"
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Header section */}
-                    <div className="text-center max-w-2xl mx-auto space-y-3 mb-14 sm:mb-20">
-                        <div className="text-xs font-semibold tracking-widest uppercase text-[#C89D7C]">
-                            Lookbook & Bộ sưu tập
-                        </div>
+                    <div className="text-center space-y-3 mb-10">
                         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#2E2728]">
                             Những Concept Được Yêu Thích
                         </h2>
-                        <p className="text-sm sm:text-base text-[#2E2728]/75 font-light">
-                            Mỗi concept là một không gian nghệ thuật được chuẩn bị chu đáo dành riêng cho bạn.
-                        </p>
                     </div>
 
-                    {/* Lưới 4 Thẻ ảnh Concept so le nhẹ */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                        {highlightConcepts.map((item, idx) => (
-                            <div
-                                key={item.id}
-                                className={`group bg-[#FFFDF9] rounded-2xl sm:rounded-3xl p-3.5 border border-[#EFE8DC] shadow-[0_10px_30px_rgba(200,157,124,0.06)] hover:shadow-[0_20px_40px_rgba(200,157,124,0.14)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between ${idx % 2 === 1 ? 'lg:translate-y-4' : ''
-                                    }`}
-                            >
-                                <div>
-                                    {/* Ảnh Concept */}
-                                    <div className="relative w-full aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden mb-4 bg-[#F3EDE2]">
-                                        <Image
-                                            src={item.image}
-                                            alt={item.title}
-                                            fill
-                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                                            className="object-cover group-hover:scale-105 transition-transform duration-700"
-                                        />
-                                        <div className="absolute top-3 left-3 bg-[#FFFDF9]/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-[10px] uppercase font-medium tracking-wider text-[#2E2728] border border-[#EFE8DC]">
-                                            {item.code}
-                                        </div>
-                                    </div>
-
-                                    {/* Tiêu đề & giá */}
-                                    <div className="px-1.5 space-y-1">
-                                        <h3 className="font-serif text-lg font-medium text-[#2E2728] group-hover:text-[#C89D7C] transition-colors">
-                                            {item.title}
-                                        </h3>
-                                        <div className="text-xs text-[#2E2728]/60 font-light flex items-center justify-between">
-                                            <span>Giá tham khảo:</span>
-                                            <span className="font-medium text-[#2E2728]">{item.price}</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Nút Xem chi tiết thanh mảnh */}
-                                <div className="pt-4 px-1.5 border-t border-[#FAF5EF] mt-4">
-                                    <button
-                                        onClick={() => setSelectedConcept(item)}
-                                        className="w-full py-2 px-3 rounded-full text-xs font-medium tracking-wide text-[#2E2728] bg-[#F3EDE2] hover:bg-[#C89D7C] hover:text-white transition-all duration-300 text-center cursor-pointer"
-                                    >
-                                        Xem chi tiết
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                    <ConceptCarousel concepts={highlightConcepts} onSelect={setSelectedConcept} />
 
                     {/* CTA nhỏ phía dưới */}
-                    <div className="mt-16 text-center">
+                    <div className="mt-5 text-center">
                         <a
                             href="#booking"
                             className="inline-flex items-center gap-2 text-sm text-[#C89D7C] hover:text-[#B88D6C] font-medium tracking-wide transition-colors group"
@@ -275,11 +224,11 @@ const Service = () => {
             )}
             <section
                 id="pricing"
-                className="py-24 sm:py-32 lg:py-36 bg-gradient-to-b from-[#FFFDF9] via-[#FAF5EF] to-[#FAF8F5] relative"
+                className="py-24 sm:py-32 lg:py-20 bg-[#F2D1D1] relative selection:bg-[#C08081]"
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Header section */}
-                    <div className="text-center max-w-2xl mx-auto space-y-3 mb-16 sm:mb-20">
+                    <div className="text-center max-w-2xl mx-auto space-y-3 mb-16 sm:mb-20 selection:text-white">
                         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#2E2728]">
                             Bảng giá & Đặt lịch
                         </h2>

@@ -13,7 +13,7 @@ const navItems: NavItem[] = [
   { label: 'Trang chủ', href: '#hero' },
   { label: 'Về chúng tôi', href: '#about-us' },
   { label: 'Dịch vụ', href: '#service' },
-  { label: 'Collection', href: '#gallery' },
+  { label: 'Bộ sưu tập', href: '#collection' },
   { label: 'Liên hệ', href: '#contact' },
 ]
 

@@ -17,7 +17,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-[#FAF5EF] text-[#2E2728] pt-16 sm:pt-20 pb-10 border-t border-[#EFE8DC]">
+    <footer className="bg-[#F2D1D1] text-[#2E2728] pt-16 sm:pt-20 pb-10 border-t border-[#EFE8DC] selection:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-[#EFE8DC]">
           {/* Cột 1: Thương hiệu */}
@@ -81,10 +81,9 @@ const Footer = () => {
             <ul className="space-y-2.5 text-sm text-[#2E2728]/80 font-light">
               {[
                 { href: '#hero', label: 'Trang chủ' },
-                { href: '#about', label: 'Về chúng tôi' },
-                { href: '#concepts', label: 'Concept nghệ thuật' },
-                { href: '#workflow', label: 'Quy trình chụp' },
-                { href: '#pricing', label: 'Bảng giá & Đặt lịch' },
+                { href: '#about-us', label: 'Về chúng tôi' },
+                { href: '#service', label: 'Dịch vụ' },
+                { href: '#collection', label: 'Bộ sưu tập' },
               ].map((link) => (
                 <li key={link.href}>
                   <a
@@ -101,14 +100,25 @@ const Footer = () => {
           {/* Cột 3: Liên hệ Studio */}
           <div className="md:col-span-4 space-y-3">
             <h3 className="text-xs font-semibold tracking-widest uppercase text-[#C89D7C]">
-              Studio TP. Hồ Chí Minh
+              Thông tin liên hệ
             </h3>
             <ul className="space-y-3 text-sm text-[#2E2728]/80 font-light">
-              <li className="flex items-start gap-2.5">
-                <EnvironmentOutlined className="text-base text-[#C89D7C] mt-0.5" />
-                <span>
-                  Tọa độ Studio Lychee Layers: 10.7475968, 106.7218922, TP. Hồ Chí Minh
-                </span>
+              {/* <li className="flex items-start gap-2.5">
+                <a href="https://www.google.com/maps/place/Lychee+Layers/@10.7475968,106.7218922,17z/data=!4m14!1m7!3m6!1s0x31752f005375be05:0x1b414021ba19f5e!2sLychee+Layers!8m2!3d10.7475968!4d106.7244671!16s%2Fg%2F11x2mh629t!3m5!1s0x31752f005375be05:0x1b414021ba19f5e!8m2!3d10.7475968!4d106.7244671!16s%2Fg%2F11x2mh629t?entry=ttu&g_ep=EgoyMDI2MTAxMi4wIKXMDSoASAFQAw%3D%3D" target='_blank'>
+                  <EnvironmentOutlined className="text-base text-[#C89D7C] mt-0.5" />
+                  <span>
+                    Xem địa chỉ
+                  </span>
+                </a>
+              </li> */}
+              <li>
+                <a
+                  href="https://www.google.com/maps/place/Lychee+Layers/@10.7475968,106.7218922,17z/data=!4m14!1m7!3m6!1s0x31752f005375be05:0x1b414021ba19f5e!2sLychee+Layers!8m2!3d10.7475968!4d106.7244671!16s%2Fg%2F11x2mh629t!3m5!1s0x31752f005375be05:0x1b414021ba19f5e!8m2!3d10.7475968!4d106.7244671!16s%2Fg%2F11x2mh629t?entry=ttu&g_ep=EgoyMDI2MTAxMi4wIKXMDSoASAFQAw%3D%3D" target='_blank'
+                  className="flex items-center gap-2.5 hover:text-[#C89D7C] transition-colors"
+                >
+                  <EnvironmentOutlined className="text-base text-[#C89D7C]" />
+                  <span className="font-medium text-[#2E2728]">Xem địa chỉ</span>
+                </a>
               </li>
               <li>
                 <a
@@ -116,7 +126,7 @@ const Footer = () => {
                   className="flex items-center gap-2.5 hover:text-[#C89D7C] transition-colors"
                 >
                   <PhoneOutlined className="text-base text-[#C89D7C]" />
-                  <span className="font-medium text-[#2E2728]">097 885 60 63</span> (Zalo / Hotline)
+                  <span className="font-medium text-[#2E2728]">097 885 60 63</span>
                 </a>
               </li>
               <li>
@@ -127,7 +137,18 @@ const Footer = () => {
                   className="flex items-center gap-2.5 hover:text-[#C89D7C] transition-colors"
                 >
                   <FacebookOutlined className="text-base text-[#C89D7C]" />
-                  <span>Lychee Layers Studio Fanpage</span>
+                  <span className='font-medium'>Facebook</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/lycheelayers"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 hover:text-[#C89D7C] transition-colors"
+                >
+                  <InstagramOutlined className="text-base text-[#C89D7C]" />
+                  <span className='font-medium'>Instagram</span>
                 </a>
               </li>
             </ul>
